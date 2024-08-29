@@ -1,8 +1,17 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { DM_Serif_Display, Inter, Noto_Sans_Arabic } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const arabic = Noto_Sans_Arabic({
+  subsets: ["arabic"],
+  variable: "--font-arabic",
+});
+
+const serif = DM_Serif_Display({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-serif",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +25,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`${arabic.variable} ${serif.variable}`}>
+        <div className="w-full px-4 md:px-10 font-arabic">{children}</div>
+      </body>
     </html>
   );
 }
