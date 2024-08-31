@@ -93,7 +93,6 @@ export async function mockTransactionData(
     await prisma.transaction.createMany({
       data: transactionsToCreate,
     });
-    console.log("Transactions created successfully");
   } catch (error) {
     console.error("Error creating transactions:", error);
   }
