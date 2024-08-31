@@ -1,8 +1,9 @@
 "use client";
 
-import { signup } from "@/app/login/actions";
+import { signup } from "@/actions/signup";
 import EmailPasswordForm from "@/components/EmailPasswordForm";
-import Link from "next/link";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { useState } from "react";
 
 export default function RegisterPage() {
@@ -10,22 +11,24 @@ export default function RegisterPage() {
   const [error, setError] = useState<string | null>(null);
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
+    const { email, password } = event.currentTarget;
     event.preventDefault();
     setIsLoading(true);
     setError(null);
 
     try {
-      const formData = new FormData(event.currentTarget);
-      await signup(formData);
+      await signup(email.value, password.value);
     } catch (error) {
       setError((error as Error).message);
       setTimeout(() => setError(null), 6000);
     } finally {
       setIsLoading(false);
     }
+
+    revalidatePath("/", "layout");
+    redirect("/");
   }
 
-  console.log(error);
   return (
     <div className="full-centered-container">
       <EmailPasswordForm

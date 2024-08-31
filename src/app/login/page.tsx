@@ -1,22 +1,22 @@
 "use client";
 
+import { login } from "@/actions/login";
 import EmailPasswordForm from "@/components/EmailPasswordForm";
-import { useState } from "react";
-import { login } from "./actions";
 import { redirect } from "next/navigation";
+import { useState } from "react";
 
 export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
+    const { email, password } = event.currentTarget;
     event.preventDefault();
     setIsLoading(true);
     setError(null);
 
     try {
-      const formData = new FormData(event.currentTarget);
-      await login(formData);
+      await login(email.value, password.value);
       redirect("/");
     } catch (error) {
       setError((error as Error).message);

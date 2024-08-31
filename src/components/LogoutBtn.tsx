@@ -1,10 +1,8 @@
 "use client";
 
 import { logout } from "@/actions/logout";
-import { createClient } from "@/utils/supabase/server";
 
 function LogoutBtn() {
-  // const supabase = createClient();
   return (
     <button
       type="button"

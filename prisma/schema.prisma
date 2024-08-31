@@ -15,13 +15,54 @@ datasource db {
 }
 
 model Transaction {
-  id        Int      @id
+  id        String   @id @default(uuid())
   amount    Float
-  userId    Int
+  message   String
+  toUserId  String
+  fromName  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 model User {
-  id String @unique
+  id    String @id @default(uuid())
+  email String @unique
+}
+
+model Balance {
+  id        String   @id @default(uuid())
+  userId    String
+  amount    Float
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Budget {
+  id        String   @id @default(uuid())
+  name      String
+  userId    String
+  amount    Float
+  limit     Float
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Bill {
+  id        String   @id @default(uuid())
+  name      String
+  userId    String
+  amount    Float
+  paid      Boolean
+  dueDate   DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Pot {
+  id        String   @id @default(uuid())
+  name      String
+  userId    String
+  amount    Float
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
