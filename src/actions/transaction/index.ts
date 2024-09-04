@@ -23,3 +23,35 @@ export async function fetchFiveUserTransactions(userId: string) {
 
   return transactions as ITransaction[];
 }
+
+export async function fetchPositiveTransactions(userId: string) {
+  const transactions = await prisma.transaction.aggregate({
+    where: {
+      toUserId: userId,
+      amount: {
+        gt: 0,
+      },
+    },
+    _sum: {
+      amount: true,
+    },
+  });
+
+  return transactions._sum.amount || 0;
+}
+
+export async function fetchNegativeTransactions(userId: string) {
+  const transactions = await prisma.transaction.aggregate({
+    where: {
+      toUserId: userId,
+      amount: {
+        lt: 0,
+      },
+    },
+    _sum: {
+      amount: true,
+    },
+  });
+
+  return transactions._sum.amount || 0;
+}

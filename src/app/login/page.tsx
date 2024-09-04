@@ -2,7 +2,6 @@
 
 import { login } from "@/actions/login";
 import EmailPasswordForm from "@/components/EmailPasswordForm";
-import { redirect } from "next/navigation";
 import { useState } from "react";
 
 export default function LoginPage() {
@@ -17,7 +16,6 @@ export default function LoginPage() {
 
     try {
       await login(email.value, password.value);
-      redirect("/");
     } catch (error) {
       setError((error as Error).message);
       setTimeout(() => setError(null), 6000);

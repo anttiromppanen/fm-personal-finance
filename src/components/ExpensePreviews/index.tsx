@@ -1,21 +1,38 @@
-function ExpenseModule() {
+import { getBalanceForUser } from "@/actions/balance";
+import {
+  fetchNegativeTransactions,
+  fetchPositiveTransactions,
+} from "@/actions/transaction";
+import { LargeCurrencyText } from "../CurrencyText";
+
+interface ExpenseModuleProps {
+  heading: string;
+  amount: number;
+}
+
+function ExpenseModule({ amount, heading }: ExpenseModuleProps) {
   return (
-    <div className="bg-white rounded-xl px-8 py-6 flex flex-col justify-between gap-y-4">
-      <h2 className="text-primaryDarkGrey text-sm">Current Balance</h2>
-      <p className="text-3xl text-primaryDark font-bold">
-        <span className="text-2xl">$</span>4,836.00
-      </p>
-    </div>
+    <article className="bg-white rounded-xl px-8 py-6 flex flex-col justify-between gap-y-4">
+      <h2 className="text-primaryDarkGrey text-sm">{heading}</h2>
+      <LargeCurrencyText amount={amount} />
+    </article>
   );
 }
 
-function ExpensePreviews() {
+async function ExpensePreviews({ userId }: { userId: string }) {
+  const balance = await getBalanceForUser(userId);
+  const positiveTransactions = await fetchPositiveTransactions(userId);
+  const negativeTransactions = await fetchNegativeTransactions(userId);
+
   return (
-    <div className="grid grid-cols-3 gap-x-8 mt-10">
-      <ExpenseModule />
-      <ExpenseModule />
-      <ExpenseModule />
-    </div>
+    <section className="grid grid-cols-3 gap-x-8 mt-10">
+      <ExpenseModule amount={balance} heading="Current Balance" />
+      <ExpenseModule amount={positiveTransactions} heading="Income" />
+      <ExpenseModule
+        amount={Math.abs(negativeTransactions)}
+        heading="Expenses"
+      />
+    </section>
   );
 }
 

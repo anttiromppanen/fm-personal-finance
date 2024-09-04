@@ -21,4 +21,12 @@
   .full-centered-container {
     @apply flex flex-col h-dvh md:h-screen items-center justify-center;
   }
+
+  .large-currency-text {
+    @apply text-3xl text-primaryDark font-bold;
+  }
+
+  .large-currency-text span {
+    @apply text-2xl;
+  }
 }
