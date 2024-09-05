@@ -42,7 +42,7 @@ export interface IBill {
   updatedAt: Date;
 }
 
-export interface Budget {
+export interface IBudget {
   id: string;
   name: string;
   userId: string;

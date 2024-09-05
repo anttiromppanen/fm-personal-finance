@@ -27,7 +27,8 @@
     "react-dom": "^18",
     "react-loading-skeleton": "^3.4.0",
     "recharts": "^2.12.7",
-    "zod": "^3.23.8"
+    "zod": "^3.23.8",
+    "zustand": "^4.5.5"
   },
   "devDependencies": {
     "@testing-library/dom": "^10.4.0",

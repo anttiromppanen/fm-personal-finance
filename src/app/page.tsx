@@ -21,7 +21,7 @@ export default async function Home() {
       </header>
       <main>
         <ExpensePreviews userId={data.user.id} />
-        <FinancePreviews />
+        <FinancePreviews userId={data.user.id} />
       </main>
     </div>
   );

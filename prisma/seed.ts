@@ -4,6 +4,7 @@ import prisma from "@/db/prismaClient";
 import { clearDbExceptUsers } from "@/utils/data/clearDbExceptUsers";
 import { mockBalanceData } from "@/utils/data/mockBalanceData";
 import { mockBillData } from "@/utils/data/mockBillData";
+import { mockBudgetData } from "@/utils/data/mockBudgetData";
 import { mockPotData } from "@/utils/data/mockPotsData";
 import { mockTransactionData } from "@/utils/data/mockTransactionData";
 
@@ -22,6 +23,7 @@ async function main() {
   await mockBalanceData(users);
   await mockBillData(users);
   await mockPotData(users);
+  await mockBudgetData(users);
 }
 
 main()

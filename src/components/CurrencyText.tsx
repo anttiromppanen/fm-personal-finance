@@ -16,9 +16,9 @@ export function LargeCurrencyText({ amount }: { amount: number }) {
     <data
       value={amount}
       aria-label={`${amount} US Dollars`}
-      className="text-3xl text-primaryDark font-bold flex items-end"
+      className="text-4xl text-primaryDark font-bold flex items-end"
     >
-      <span className="text-2xl">$</span>
+      <span className="text-3xl">$</span>
       <span>{amount}</span>
     </data>
   );

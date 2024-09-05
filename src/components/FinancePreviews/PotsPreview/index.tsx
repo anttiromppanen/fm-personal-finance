@@ -1,11 +1,8 @@
-import { fetchTotalSumOfPots, fetchFirstFourPots } from "@/actions/pot";
-import {
-  LargeCurrencyText,
-  SmallCurrencyText,
-} from "@/components/CurrencyText";
+import { fetchFirstFourPots, fetchTotalSumOfPots } from "@/actions/pot";
+import { LargeCurrencyText } from "@/components/CurrencyText";
 import { faSackDollar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import PotPreview from "./PotPreview";
+import ColoredPreviewItem from "../ColoredPreviewItem";
 import Header from "../Header";
 
 async function PotsPreview() {
@@ -26,9 +23,9 @@ async function PotsPreview() {
             <LargeCurrencyText amount={totalSum} />
           </div>
         </div>
-        <div className="grid grid-rows-2 grid-cols-2 gap-4 *:border-l-4 py-1">
+        <div className="grid grid-rows-2 grid-cols-2 gap-4 py-1">
           {potsPreviews.map((pot, index) => (
-            <PotPreview key={pot.id} {...pot} index={index} />
+            <ColoredPreviewItem key={pot.id} {...pot} index={index} />
           ))}
         </div>
       </div>

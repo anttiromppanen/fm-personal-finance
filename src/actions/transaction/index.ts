@@ -8,17 +8,23 @@ export async function fetchAllUserTransactions(userId: string) {
     where: {
       toUserId: userId,
     },
+    orderBy: {
+      createdAt: "desc",
+    },
   });
 
   return transactions as ITransaction[];
 }
 
-export async function fetchFiveUserTransactions(userId: string) {
+export async function fetchEightUserTransactions(userId: string) {
   const transactions = await prisma.transaction.findMany({
     where: {
       toUserId: userId,
     },
-    take: 5,
+    orderBy: {
+      createdAt: "desc",
+    },
+    take: 8,
   });
 
   return transactions as ITransaction[];
