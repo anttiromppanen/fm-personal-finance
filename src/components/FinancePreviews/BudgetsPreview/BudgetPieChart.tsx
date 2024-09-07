@@ -3,6 +3,7 @@
 import { LargeCurrencyText } from "@/components/CurrencyText";
 import useActiveBudgetStore from "@/store/activeBudgetStore";
 import { IBudget } from "@/types";
+import { hexBgColors } from "@/utils/colors";
 import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts";
 
 interface BudgetPieChartProps {
@@ -10,8 +11,6 @@ interface BudgetPieChartProps {
   totalAmount: number;
   totalLimit: number;
 }
-
-const colors = ["#277C77", "#81C9D7", "#625F70", "#F1CDAB"];
 
 interface IActiveBudget {
   name: string;
@@ -51,7 +50,7 @@ function BudgetPieChart({
             {fourBiggestBudgets.map((entry, index) => (
               <Cell
                 key={`cell-${index}`}
-                fill={colors[index]}
+                fill={hexBgColors[index]}
                 className={
                   activeBudget?.name === entry.name
                     ? "brightness-110 opacity-80"

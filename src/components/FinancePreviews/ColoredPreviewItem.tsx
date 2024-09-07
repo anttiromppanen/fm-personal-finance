@@ -2,6 +2,7 @@
 
 import { SmallCurrencyText } from "@/components/CurrencyText";
 import useActiveBudgetStore from "@/store/activeBudgetStore";
+import { tailwindBorderColors } from "@/utils/colors";
 
 interface PotPreviewProps {
   name: string;
@@ -10,15 +11,6 @@ interface PotPreviewProps {
   index: number;
   budget?: boolean;
 }
-
-const borderColors = [
-  "border-l-secondaryGreen",
-  "border-l-secondaryTeal",
-  "border-l-primaryDarkGrey",
-  "border-l-secondaryBrown",
-  "border-l-primaryDark",
-  "border-l-primaryLightGrey",
-];
 
 function ColoredPreviewItem({
   name,
@@ -38,7 +30,7 @@ function ColoredPreviewItem({
     <div
       onMouseEnter={() => budget && setActiveBudget(newActiveBudget)}
       onMouseLeave={() => budget && setActiveBudget(null)}
-      className={`transition-all cursor-default ${borderColors[index]} ${activeBudget?.name === name ? "border-l-[40px]" : "border-l-[6px]"}`}
+      className={`transition-all cursor-default ${tailwindBorderColors[index]} ${activeBudget?.name === name ? "border-l-[40px]" : "border-l-4"}`}
     >
       <div className="ml-4 flex flex-col gap-y-2">
         <h3 className="text-[10px] text-primaryDarkGrey">{name}</h3>

@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "test": "vitest",
-    "prisma:studio": "prisma studio"
+    "prisma:studio": "prisma studio",
+    "production:build": "prisma migrate deploy && next build",
+    "postinstall": "prisma generate"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
@@ -40,6 +42,7 @@
     "eslint": "^8",
     "eslint-config-next": "14.2.6",
     "eslint-config-prettier": "^9.1.0",
+    "jsdoc": "^4.0.3",
     "jsdom": "^25.0.0",
     "postcss": "^8",
     "prettier": "^3.3.3",
