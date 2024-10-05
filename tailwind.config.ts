@@ -24,5 +24,13 @@ const config: Config = {
     },
   },
   plugins: [],
+  safelist: [
+    "border-l-secondaryGreen",
+    "border-l-secondaryTeal",
+    "border-l-primaryDarkGrey",
+    "border-l-secondaryBrown",
+    "border-l-primaryDark",
+    "border-l-primaryLightGrey",
+  ],
 };
 export default config;

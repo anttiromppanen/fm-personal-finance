@@ -68,7 +68,7 @@ function BudgetPieChart({
             innerRadius="70%" // Creates a thin ring effect
             stroke="none"
             fill="rgba(255, 255, 255, 0.3)" // Optional: Set a semi-transparent color
-            className="relative"
+            className="relative pointer-events-none"
           />
         </PieChart>
       </ResponsiveContainer>

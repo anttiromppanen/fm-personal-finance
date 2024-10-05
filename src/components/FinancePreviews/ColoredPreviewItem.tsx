@@ -1,5 +1,6 @@
 "use client";
 
+import { twJoin } from "tailwind-merge";
 import { SmallCurrencyText } from "@/components/CurrencyText";
 import useActiveBudgetStore from "@/store/activeBudgetStore";
 import { tailwindBorderColors } from "@/utils/colors";
@@ -25,12 +26,17 @@ function ColoredPreviewItem({
   );
 
   const newActiveBudget = { name, amount, limit: limit || 0 };
+  const borderColor = tailwindBorderColors[index];
 
   return (
     <div
       onMouseEnter={() => budget && setActiveBudget(newActiveBudget)}
       onMouseLeave={() => budget && setActiveBudget(null)}
-      className={`transition-all cursor-default ${tailwindBorderColors[index]} ${activeBudget?.name === name ? "border-l-[40px]" : "border-l-4"}`}
+      className={twJoin(
+        "transition-all cursor-default",
+        borderColor,
+        activeBudget?.name === name ? "border-l-[40px]" : "border-l-4",
+      )}
     >
       <div className="ml-4 flex flex-col gap-y-2">
         <h3 className="text-[10px] text-primaryDarkGrey">{name}</h3>
