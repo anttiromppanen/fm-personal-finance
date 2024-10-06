@@ -26,7 +26,12 @@ jobs:
           version: latest
 
       - name: 🗃️ Start Supabase
-        run: supabase start && npx prisma db seed && npx prisma db push
+        run: supabase start
+
+      - name: Apply Prisma migrations and seed database
+        run: |
+          npx prisma db push # Apply migrations
+          npx prisma db seed # Seed the database
 
       - name: Run Playwright tests
         run: npx playwright test
