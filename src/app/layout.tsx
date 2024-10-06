@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { DM_Serif_Display, Inter, Noto_Sans_Arabic } from "next/font/google";
 import "./globals.css";
+import Sidenav from "@/components/Sidenav";
 
 const arabic = Noto_Sans_Arabic({
   subsets: ["arabic"],
@@ -26,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${arabic.variable} ${serif.variable}`}>
-        <div className="w-full px-4 md:px-10 font-arabic">{children}</div>
+        <div className="w-full px-4 md:px-10 font-arabic flex">{children}</div>
       </body>
     </html>
   );
