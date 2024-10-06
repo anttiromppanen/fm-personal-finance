@@ -8,25 +8,8 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
-
-    services:
-      postgres:
-        image: supabase/postgres:latest
-        ports:
-          - 54321:5432 # Map the database port
-        options: >-
-          --health-cmd="pg_isready -U postgres"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=5
-        env:
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_USER: postgres
-          POSTGRES_DB: postgres
-
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-node@v4
         with:
           node-version: lts/*
@@ -37,23 +20,16 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
-      - name: Wait for Supabase Docker to be ready
-        run: |
-          for i in {1..10}; do
-            nc -zv localhost 54321 && echo "Supabase is ready!" && break
-            echo "Waiting for Supabase Docker container to be ready..."
-            sleep 5
-          done
+      - name: 👩‍💻 Setup Supabase CLI
+        uses: supabase/setup-cli@v1
+        with:
+          version: latest
 
-      - name: Run Prisma migrations
-        run: npx prisma db push && npx prisma db seed
-        env:
-          DATABASE_URL: postgresql://postgres:postgres@localhost:54321/postgres
+      - name: 🗃️ Start Supabase
+        run: supabase start && npx prisma db seed && npx prisma db push
 
       - name: Run Playwright tests
         run: npx playwright test
-        env:
-          DATABASE_URL: postgresql://postgres:postgres@localhost:54321/postgres # Pass the database URL for tests
 
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
