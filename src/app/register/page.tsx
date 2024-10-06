@@ -2,8 +2,6 @@
 
 import { signup } from "@/actions/signup";
 import EmailPasswordForm from "@/components/EmailPasswordForm";
-import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 import { useState } from "react";
 
 export default function RegisterPage() {
@@ -24,9 +22,6 @@ export default function RegisterPage() {
     } finally {
       setIsLoading(false);
     }
-
-    revalidatePath("/", "layout");
-    redirect("/");
   }
 
   return (
