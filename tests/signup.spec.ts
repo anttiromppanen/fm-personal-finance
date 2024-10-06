@@ -1,3 +1,4 @@
+import { usersWithValidCredentials } from "@/utils/data/mockUserData";
 import { expect, test } from "@playwright/test";
 
 test.beforeEach(async ({ page }) => {
@@ -30,5 +31,25 @@ test.describe("Signup", () => {
     await expect(page.getByRole("heading", { name: "Overview" })).toBeVisible();
 
     await page.click("text=Logout");
+  });
+
+  test("should show an error message if the email is already in use", async ({
+    page,
+  }) => {
+    await expect(page.getByRole("heading", { name: "Sign Up" })).toBeVisible();
+
+    const emailFiend = page.getByPlaceholder("Enter email address");
+    const passwordField = page.getByPlaceholder("Password");
+    const submitButton = page.getByRole("button", { name: "Sign up" });
+
+    const registeredUser = usersWithValidCredentials[0];
+
+    await emailFiend.fill(registeredUser.email);
+    await passwordField.fill(registeredUser.password);
+    await submitButton.click();
+
+    await page.waitForLoadState("domcontentloaded");
+    await expect(page).toHaveURL("http://localhost:3000/register");
+    await expect(page.getByText("User already exists")).toBeVisible();
   });
 });

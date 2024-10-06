@@ -2,15 +2,16 @@
 
 import { signup } from "@/actions/signup";
 import EmailPasswordForm from "@/components/EmailPasswordForm";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function RegisterPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
-    const { email, password } = event.currentTarget;
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const { email, password } = event.currentTarget;
+
     setIsLoading(true);
     setError(null);
 
@@ -22,7 +23,7 @@ export default function RegisterPage() {
     } finally {
       setIsLoading(false);
     }
-  }
+  };
 
   return (
     <div className="full-centered-container">

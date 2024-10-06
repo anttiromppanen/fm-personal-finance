@@ -1,6 +1,6 @@
-import Link from "next/link";
-import { FormEvent } from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
+import { FormEvent, useState } from "react";
 import Loader from "./Loader";
 
 interface EmailPasswordFormProps {
@@ -24,6 +24,7 @@ function EmailPasswordForm({
     buttonText === "Log In"
       ? "Not registered yet?"
       : "Already have an account?";
+
   const footerLinkText = buttonText === "Log In" ? "Sign up" : "Log in";
 
   return (
@@ -33,6 +34,7 @@ function EmailPasswordForm({
       {/* Error text */}
       {errorText && (
         <motion.div
+          key={errorText}
           initial={{ x: -10, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
         >

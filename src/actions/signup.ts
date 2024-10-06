@@ -16,6 +16,16 @@ export async function signup(email: string, password: string, isSeed = false) {
     signupZSchema,
   );
 
+  const personExists = await prisma.user.findUnique({
+    where: {
+      email,
+    },
+  });
+
+  if (personExists) {
+    throw new Error("User already exists");
+  }
+
   const { error, data: savedData } = await supabase.auth.signUp(
     parseResult as IEmailAndPassword,
   );

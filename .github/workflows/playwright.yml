@@ -16,10 +16,10 @@ jobs:
         with:
           node-version: lts/*
 
-      - name: Install dependencies
+      - name: ✨ Install dependencies
         run: npm ci
 
-      - name: Install Playwright Browsers
+      - name: ✨ Install Playwright Browsers
         run: npx playwright install --with-deps
 
       - name: 👩‍💻 Setup Supabase CLI
@@ -33,7 +33,7 @@ jobs:
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           NEXT_PUBLIC_SUPABASE_SERVICE_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_SERVICE_KEY }}
 
-      - name: Apply Prisma migrations and seed database
+      - name: 🍓 Apply Prisma migrations and seed database
         run: |
           npm run db:push # Apply migrations
           npm run seed:test # Seed the database
@@ -43,8 +43,8 @@ jobs:
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           NEXT_PUBLIC_SUPABASE_SERVICE_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_SERVICE_KEY }}
 
-      - name: Run Playwright tests
-        run: npx playwright test
+      - name: 🏃 Run Playwright tests
+        run: npx playwright test --workers=1
         env:
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           NEXT_PUBLIC_SUPABASE_SERVICE_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_SERVICE_KEY }}
