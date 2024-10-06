@@ -1,4 +1,5 @@
 name: Playwright Tests
+concurrency: production
 on:
   push:
     branches: [main, master]
@@ -8,6 +9,7 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    environment: production
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
