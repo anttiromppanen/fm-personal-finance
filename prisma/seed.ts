@@ -1,5 +1,6 @@
 "use server";
 
+import { signup } from "@/actions/signup";
 import prisma from "@/db/prismaClient";
 import { clearDbExceptUsers } from "@/utils/data/clearDbExceptUsers";
 import { mockBalanceData } from "@/utils/data/mockBalanceData";
@@ -7,15 +8,12 @@ import { mockBillData } from "@/utils/data/mockBillData";
 import { mockBudgetData } from "@/utils/data/mockBudgetData";
 import { mockPotData } from "@/utils/data/mockPotsData";
 import { mockTransactionData } from "@/utils/data/mockTransactionData";
+import { usersWithValidCredentials } from "@/utils/data/mockUserData";
+import { repopulateDbWithUsers } from "@/utils/repopulateDbWithUsers";
 
 async function main() {
+  await repopulateDbWithUsers();
   const users = await prisma.user.findMany();
-
-  if (!users.length) {
-    throw new Error(
-      "No users found in the database. Please seed the database with users first.",
-    );
-  }
 
   await clearDbExceptUsers();
 

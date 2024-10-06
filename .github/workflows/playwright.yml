@@ -35,11 +35,11 @@ jobs:
 
       - name: Apply Prisma migrations and seed database
         run: |
-          npx prisma db push # Apply migrations
-          npx prisma db seed # Seed the database
+          npm run db:push # Apply migrations
+          npm run seed:test # Seed the database
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          DIRECT_URL: postgresql://postgres:postgres@127.0.0.1:54322/postgres
+          DIRECT_URL: ${{ secrets.DIRECT_URL }}
 
       - name: Run Playwright tests
         run: npx playwright test
