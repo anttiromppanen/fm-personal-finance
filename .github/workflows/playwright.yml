@@ -27,11 +27,16 @@ jobs:
 
       - name: 🗃️ Start Supabase
         run: supabase start
+        env:
+          SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_SERVICE_KEY }}
 
       - name: Apply Prisma migrations and seed database
         run: |
           npx prisma db push # Apply migrations
           npx prisma db seed # Seed the database
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
       - name: Run Playwright tests
         run: npx playwright test
