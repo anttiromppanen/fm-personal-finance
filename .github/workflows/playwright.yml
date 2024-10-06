@@ -37,6 +37,7 @@ jobs:
           npx prisma db seed # Seed the database
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DIRECT_URL: ${{ secrets.DIRECT_URL }}
 
       - name: Run Playwright tests
         run: npx playwright test
