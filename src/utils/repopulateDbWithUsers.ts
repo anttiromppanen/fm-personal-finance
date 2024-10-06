@@ -2,6 +2,7 @@
 
 import { deleteAllUsers } from "@/actions/deleteUsers";
 import { signup } from "@/actions/signup";
+import prisma from "@/db/prismaClient";
 import { usersWithValidCredentials } from "@/utils/data/mockUserData";
 
 /**
@@ -13,15 +14,17 @@ import { usersWithValidCredentials } from "@/utils/data/mockUserData";
  */
 
 export async function repopulateDbWithUsers() {
-  await deleteAllUsers();
+  await prisma.$transaction(async () => {
+    await deleteAllUsers();
 
-  try {
-    await Promise.all(
-      usersWithValidCredentials.map(
-        async ({ email, password }) => await signup(email, password, true),
-      ),
-    );
-  } catch (error) {
-    console.error(error);
-  }
+    try {
+      await Promise.all(
+        usersWithValidCredentials.map(
+          async ({ email, password }) => await signup(email, password, true),
+        ),
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  });
 }

@@ -1,3 +1,5 @@
+"use server";
+
 import { repopulateDbWithUsers } from "@/utils/repopulateDbWithUsers";
 import { NextResponse } from "next/server";
 
