@@ -3,7 +3,7 @@
 import prisma from "@/db/prismaClient";
 import { IBalance } from "@/types";
 
-const balanceData: Omit<IBalance, "id" | "userId">[] = [
+export const balanceData: Omit<IBalance, "id" | "userId">[] = [
   {
     amount: 1000,
     createdAt: new Date(),

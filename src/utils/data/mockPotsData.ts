@@ -3,7 +3,7 @@
 import prisma from "@/db/prismaClient";
 import { IPot } from "@/types";
 
-const potsData: Omit<IPot, "id" | "userId">[] = [
+export const potsData: Omit<IPot, "id" | "userId">[] = [
   {
     name: "Savings",
     amount: 159,

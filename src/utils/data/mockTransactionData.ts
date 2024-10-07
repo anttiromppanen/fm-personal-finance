@@ -4,7 +4,7 @@ import prisma from "@/db/prismaClient";
 import { ITransaction } from "@/types";
 
 // set userId field from user id
-const transactionData: Omit<ITransaction, "id" | "toUserId">[] = [
+export const transactionData: Omit<ITransaction, "id" | "toUserId">[] = [
   {
     amount: -300,
     message: "Mock message 1",

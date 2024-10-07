@@ -1,7 +1,7 @@
 import prisma from "@/db/prismaClient";
 import { IBudget } from "@/types";
 
-const budgetData: Omit<IBudget, "id" | "userId">[] = [
+export const budgetData: Omit<IBudget, "id" | "userId">[] = [
   {
     name: "Groceries",
     amount: 200,
