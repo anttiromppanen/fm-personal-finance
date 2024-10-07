@@ -1,4 +1,5 @@
 import { handleUserCredentialsForm } from "@/helpers/test/testHelpers";
+import { signupValidationErrorText } from "@/helpers/zodValidation";
 import { usersWithValidCredentials } from "@/utils/data/mockUserData";
 import { expect, test } from "@playwright/test";
 
@@ -27,7 +28,7 @@ test.describe("Signup", () => {
       page,
       validNewUser.email,
       validNewUser.password,
-      "signup",
+      "register",
     );
 
     await page.waitForLoadState("domcontentloaded");
@@ -47,11 +48,129 @@ test.describe("Signup", () => {
       page,
       registeredUser.email,
       registeredUser.password,
-      "signup",
+      "register",
     );
 
     await page.waitForLoadState("domcontentloaded");
     await expect(page).toHaveURL("http://localhost:3000/register");
     await expect(page.getByText("User already exists")).toBeVisible();
+  });
+
+  test.describe("Validation", () => {
+    // Error messages are handled by the default browser popup, cannot test for error text
+    test.describe("Email validation", () => {
+      test("fails when missing @ symbol", async ({ page }) => {
+        const userWithInvalidEmail = {
+          email: "plainaddress.com",
+          password: "CorrectPassword123",
+        };
+
+        await handleUserCredentialsForm(
+          page,
+          userWithInvalidEmail.email,
+          userWithInvalidEmail.password,
+          "register",
+        );
+
+        await expect(page).toHaveURL("http://localhost:3000/register");
+      });
+
+      test("fails when missing username before the @ symbol", async ({
+        page,
+      }) => {
+        const userWithInvalidEmail = {
+          email: "@domain.com",
+          password: "idealPassword666",
+        };
+
+        await handleUserCredentialsForm(
+          page,
+          userWithInvalidEmail.email,
+          userWithInvalidEmail.password,
+          "register",
+        );
+
+        await expect(page).toHaveURL("http://localhost:3000/register");
+      });
+
+      test("fails when missing email address", async ({ page }) => {
+        const userWithInvalidEmail = {
+          email: "",
+          password: "idealPassword666",
+        };
+
+        await handleUserCredentialsForm(
+          page,
+          userWithInvalidEmail.email,
+          userWithInvalidEmail.password,
+          "register",
+        );
+
+        await expect(page).toHaveURL("http://localhost:3000/register");
+      });
+    });
+
+    /**
+     * @Password validation schema
+     * - Password must contain at least 6 letters, uppercase characters, lowercase characters, and numbers
+     */
+    test.describe("Password validation", () => {
+      test("fails when password is less than 6 characters", async ({
+        page,
+      }) => {
+        const userWithInvalidPassword = {
+          email: "validemail@email.com",
+          password: "aBc12",
+        };
+
+        await handleUserCredentialsForm(
+          page,
+          userWithInvalidPassword.email,
+          userWithInvalidPassword.password,
+          "register",
+        );
+
+        await expect(page).toHaveURL("http://localhost:3000/register");
+        await expect(page.getByText(signupValidationErrorText)).toBeVisible();
+      });
+
+      test("fails when password does not contain uppercase characters", async ({
+        page,
+      }) => {
+        const userWithInvalidPassword = {
+          email: "validemail@email.com",
+          password: "abcdef123",
+        };
+
+        await handleUserCredentialsForm(
+          page,
+          userWithInvalidPassword.email,
+          userWithInvalidPassword.password,
+          "register",
+        );
+
+        await expect(page).toHaveURL("http://localhost:3000/register");
+        await expect(page.getByText(signupValidationErrorText)).toBeVisible();
+      });
+
+      test("fails when password does not contain lowercase characters", async ({
+        page,
+      }) => {
+        const userWithInvalidPassword = {
+          email: "validemail@email.com",
+          password: "ABCDEF123",
+        };
+
+        await handleUserCredentialsForm(
+          page,
+          userWithInvalidPassword.email,
+          userWithInvalidPassword.password,
+          "register",
+        );
+
+        await expect(page).toHaveURL("http://localhost:3000/register");
+        await expect(page.getByText(signupValidationErrorText)).toBeVisible();
+      });
+    });
   });
 });

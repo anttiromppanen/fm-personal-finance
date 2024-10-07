@@ -4,9 +4,9 @@ export async function handleUserCredentialsForm(
   page: Page,
   email: string,
   password: string,
-  formType: "signup" | "login",
+  formType: "register" | "login",
 ) {
-  const buttonText = formType === "signup" ? "Sign up" : "Log In";
+  const buttonText = formType === "register" ? "Sign up" : "Log In";
 
   const emailField = page.getByPlaceholder("Enter email address");
   const passwordField = page.getByPlaceholder("Password");
