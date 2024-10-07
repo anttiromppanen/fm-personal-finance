@@ -1,15 +1,6 @@
+import { handleUserCredentialsForm } from "@/helpers/test/testHelpers";
 import { usersWithValidCredentials } from "@/utils/data/mockUserData";
 import { expect, Page, test } from "@playwright/test";
-
-async function handleForm(page: Page, email: string, password: string) {
-  const emailField = page.getByPlaceholder("Enter email address");
-  const passwordField = page.getByPlaceholder("Password");
-  const submitButton = page.getByRole("button", { name: "Log In" });
-
-  await emailField.fill(email);
-  await passwordField.fill(password);
-  await submitButton.click();
-}
 
 test.describe("Login", () => {
   test("should initially be redirected to /login", async ({ page }) => {
@@ -21,7 +12,12 @@ test.describe("Login", () => {
     const validUser = usersWithValidCredentials[0];
     await page.goto("http://localhost:3000/login");
 
-    await handleForm(page, validUser.email, validUser.password);
+    await handleUserCredentialsForm(
+      page,
+      validUser.email,
+      validUser.password,
+      "login",
+    );
 
     await expect(page).toHaveURL("http://localhost:3000/");
     await expect(page.getByRole("heading", { name: "Overview" })).toBeVisible();
@@ -36,7 +32,12 @@ test.describe("Login", () => {
     };
     await page.goto("http://localhost:3000/login");
 
-    await handleForm(page, notRegisteredUser.email, notRegisteredUser.password);
+    await handleUserCredentialsForm(
+      page,
+      notRegisteredUser.email,
+      notRegisteredUser.password,
+      "login",
+    );
 
     await expect(page).toHaveURL("http://localhost:3000/login");
     await expect(page.getByText("Invalid login credentials")).toBeVisible();
@@ -51,10 +52,11 @@ test.describe("Login", () => {
       };
       await page.goto("http://localhost:3000/login");
 
-      await handleForm(
+      await handleUserCredentialsForm(
         page,
         userWithInvalidEmail.email,
         userWithInvalidEmail.password,
+        "login",
       );
 
       await expect(page).toHaveURL("http://localhost:3000/login");
@@ -69,10 +71,11 @@ test.describe("Login", () => {
       };
       await page.goto("http://localhost:3000/login");
 
-      await handleForm(
+      await handleUserCredentialsForm(
         page,
         userWithInvalidEmail.email,
         userWithInvalidEmail.password,
+        "login",
       );
 
       await expect(page).toHaveURL("http://localhost:3000/login");
@@ -85,10 +88,11 @@ test.describe("Login", () => {
       };
       await page.goto("http://localhost:3000/login");
 
-      await handleForm(
+      await handleUserCredentialsForm(
         page,
         userWithInvalidEmail.email,
         userWithInvalidEmail.password,
+        "login",
       );
 
       await expect(page).toHaveURL("http://localhost:3000/login");

@@ -1,3 +1,4 @@
+import { handleUserCredentialsForm } from "@/helpers/test/testHelpers";
 import { usersWithValidCredentials } from "@/utils/data/mockUserData";
 import { expect, test } from "@playwright/test";
 
@@ -16,15 +17,18 @@ test.afterAll(async () => {
 
 test.describe("Signup", () => {
   test("should allow a new user to sign up", async ({ page }) => {
+    const validNewUser = {
+      email: "testuser666@test.com",
+      password: "Password123",
+    };
     await expect(page.getByRole("heading", { name: "Sign Up" })).toBeVisible();
 
-    const emailFiend = page.getByPlaceholder("Enter email address");
-    const passwordField = page.getByPlaceholder("Password");
-    const submitButton = page.getByRole("button", { name: "Sign up" });
-
-    await emailFiend.fill("testuser666@test.com");
-    await passwordField.fill("Password123");
-    await submitButton.click();
+    await handleUserCredentialsForm(
+      page,
+      validNewUser.email,
+      validNewUser.password,
+      "signup",
+    );
 
     await page.waitForLoadState("domcontentloaded");
     await expect(page).toHaveURL("http://localhost:3000/");
@@ -36,17 +40,15 @@ test.describe("Signup", () => {
   test("should show an error message if the email is already in use", async ({
     page,
   }) => {
+    const registeredUser = usersWithValidCredentials[0];
     await expect(page.getByRole("heading", { name: "Sign Up" })).toBeVisible();
 
-    const emailFiend = page.getByPlaceholder("Enter email address");
-    const passwordField = page.getByPlaceholder("Password");
-    const submitButton = page.getByRole("button", { name: "Sign up" });
-
-    const registeredUser = usersWithValidCredentials[0];
-
-    await emailFiend.fill(registeredUser.email);
-    await passwordField.fill(registeredUser.password);
-    await submitButton.click();
+    await handleUserCredentialsForm(
+      page,
+      registeredUser.email,
+      registeredUser.password,
+      "signup",
+    );
 
     await page.waitForLoadState("domcontentloaded");
     await expect(page).toHaveURL("http://localhost:3000/register");
