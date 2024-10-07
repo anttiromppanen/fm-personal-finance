@@ -78,7 +78,7 @@ test.describe("Login", () => {
       await expect(page).toHaveURL("http://localhost:3000/login");
     });
 
-    test.only("fails when missing email address", async ({ page }) => {
+    test("fails when missing email address", async ({ page }) => {
       const userWithInvalidEmail = {
         email: "",
         password: "idealPassword666",
