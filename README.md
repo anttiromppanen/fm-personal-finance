@@ -7,22 +7,34 @@
 A Next.js fullstack project based on frontendmentor.io design
 
 ## Usage
-TODO
+
+You can test the application by using mock user, or create a new user by registering. Currently no support for adding financial information.
+
+#### Mock user
+
+- Username: testuser@email.com
+- Password: Password123
 
 ## Current features
+
 - User login and register
 - Shows financial information for the logged in user
 - User logout
 
 ## Tech stack
+
 ### General
+
 - React, Next.js, Nodev21.6.0, Typescript
 
 ### Database
+
 - Supabase, Prisma
 
 ### Testing
+
 - Playwright, GitHub Actions
 
 ### Linting
+
 - Eslint, Prettier
