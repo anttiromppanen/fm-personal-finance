@@ -16,10 +16,13 @@ TODO
 
 ## Tech stack
 ### General
-- React, Next.js, Nodev21.6.0
+- React, Next.js, Nodev21.6.0, Typescript
 
 ### Database
 - Supabase, Prisma
 
 ### Testing
 - Playwright, GitHub Actions
+
+### Linting
+- Eslint, Prettier
