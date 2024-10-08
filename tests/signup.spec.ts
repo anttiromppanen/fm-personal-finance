@@ -1,25 +1,22 @@
 import { handleUserCredentialsForm } from "@/helpers/test/testHelpers";
 import { signupValidationErrorText } from "@/helpers/zodValidation";
 import { usersWithValidCredentials } from "@/utils/data/mockUserData";
+import { deleteUserByEmail } from "@/utils/deleteUser";
+import { repopulateDbWithUsers } from "@/utils/repopulateDbWithUsers";
 import { expect, test } from "@playwright/test";
+import { exec, execSync } from "child_process";
+import { execOnce } from "next/dist/shared/lib/utils";
+import { execArgv } from "process";
 
 test.beforeEach(async ({ page }) => {
-  await fetch("http://localhost:3000/api/repopulate-users", {
-    method: "POST",
-  });
   await page.goto("http://localhost:3000/register");
-});
-
-test.afterAll(async () => {
-  await fetch("http://localhost:3000/api/repopulate-users", {
-    method: "POST",
-  });
 });
 
 test.describe("Signup", () => {
   test("should allow a new user to sign up", async ({ page }) => {
+    const uniqueEmail = `testuser${Date.now()}@test.com`;
     const validNewUser = {
-      email: "testuser666@test.com",
+      email: uniqueEmail,
       password: "Password123",
     };
     await expect(page.getByRole("heading", { name: "Sign Up" })).toBeVisible();
@@ -31,7 +28,6 @@ test.describe("Signup", () => {
       "register",
     );
 
-    await page.waitForLoadState("domcontentloaded");
     await expect(page).toHaveURL("http://localhost:3000/");
     await expect(page.getByRole("heading", { name: "Overview" })).toBeVisible();
 

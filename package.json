@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "vitest",
+    "test": "npm run seed:test && npx playwright test",
     "prisma:studio": "prisma studio",
     "db:push": "prisma db push",
     "seed:test": "NODE_ENV=test prisma db seed",
