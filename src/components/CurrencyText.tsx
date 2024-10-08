@@ -1,3 +1,5 @@
+import { twJoin, twMerge } from "tailwind-merge";
+
 export function SmallCurrencyText({ amount }: { amount: number }) {
   return (
     <data
@@ -11,12 +13,21 @@ export function SmallCurrencyText({ amount }: { amount: number }) {
   );
 }
 
-export function LargeCurrencyText({ amount }: { amount: number }) {
+export function LargeCurrencyText({
+  amount,
+  variant = "light",
+}: {
+  amount: number;
+  variant?: "light" | "dark";
+}) {
   return (
     <data
       value={amount}
       aria-label={`${amount} US Dollars`}
-      className="text-4xl text-primaryDark font-bold flex items-end"
+      className={twMerge(
+        "text-4xl font-bold text-primaryDark flex items-end",
+        variant === "dark" && "text-white",
+      )}
     >
       <span className="text-3xl">$</span>
       <span data-testid="amount">{amount}</span>

@@ -3,6 +3,7 @@ import {
   fetchNegativeTransactions,
   fetchPositiveTransactions,
 } from "@/actions/transaction";
+import { twMerge } from "tailwind-merge";
 import { LargeCurrencyText } from "../CurrencyText";
 
 interface ExpenseModuleProps {
@@ -15,10 +16,16 @@ function ExpenseModule({ amount, heading, testId }: ExpenseModuleProps) {
   return (
     <article
       data-testid={testId}
-      className="bg-white rounded-xl px-8 py-6 flex flex-col justify-between gap-y-4"
+      className={twMerge(
+        "bg-white rounded-xl px-8 py-6 flex flex-col justify-between text-primaryDarkGrey gap-y-4",
+        heading === "Current Balance" && "bg-primaryDark text-white",
+      )}
     >
-      <h2 className="text-primaryDarkGrey text-sm">{heading}</h2>
-      <LargeCurrencyText amount={amount} />
+      <h2 className="text-sm">{heading}</h2>
+      <LargeCurrencyText
+        amount={amount}
+        variant={heading === "Current Balance" ? "dark" : "light"}
+      />
     </article>
   );
 }
