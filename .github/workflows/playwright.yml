@@ -56,20 +56,3 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: test
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: lts/*
-
-      - name: ✨ Install dependencies
-        run: npm ci
-
-      - name: 🍓 Apply Prisma migrations to production
-        run: npm run db:deploy
-        env:
-          DATABASE_URL: ${{ secrets.PROD_DATABASE_URL }}
