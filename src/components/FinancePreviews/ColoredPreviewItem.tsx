@@ -33,9 +33,9 @@ function ColoredPreviewItem({
       onMouseEnter={() => budget && setActiveBudget(newActiveBudget)}
       onMouseLeave={() => budget && setActiveBudget(null)}
       className={twJoin(
-        "transition-all cursor-default flex flex-col items-center xl:block",
+        "transition-all cursor-default",
         borderColor,
-        activeBudget?.name === name ? "xl:border-l-[25px]" : "xl:border-l-4",
+        activeBudget?.name === name ? "border-l-[25px]" : "border-l-4",
       )}
     >
       <div className="ml-4 flex flex-col gap-y-2">

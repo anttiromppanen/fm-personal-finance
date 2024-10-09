@@ -10,20 +10,20 @@ async function PotsPreview() {
   const potsPreviews = await fetchFirstFourPots();
 
   return (
-    <article className="row-span-1 col-span-1 bg-white">
+    <article className="xl:row-span-1 xl:col-span-1 bg-white">
       <Header heading="Pots" linkText="See Details" />
       <div className="grid xl:grid-cols-2 gap-x-4 gap-y-4 xl:gap-y-0 mt-6">
-        <div className="flex bg-primaryLight gap-x-6 items-center rounded-xl p-4 xl:p-6 col-span-1">
+        <div className="flex bg-primaryLight gap-x-6 items-center rounded-xl p-6 lg:p-4 xl:p-6 col-span-1">
           <FontAwesomeIcon
             icon={faSackDollar}
             className="size-8 text-green-500"
           />
-          <div className="flex flex-col justify-between gap-y-2">
+          <div className="flex flex-col justify-between gap-y-4 lg:gap-y-2">
             <h3 className="text-xs text-primaryDarkGrey">Total Saved</h3>
             <LargeCurrencyText amount={totalSum} />
           </div>
         </div>
-        <div className="grid xl:grid-rows-2 grid-cols-4 xl:grid-cols-2 gap-4 py-1">
+        <div className="grid grid-rows-2 grid-cols-2 xl:grid-rows-2 xl:grid-cols-2 gap-4 py-1">
           {potsPreviews.map((pot, index) => (
             <ColoredPreviewItem key={pot.id} {...pot} index={index} />
           ))}

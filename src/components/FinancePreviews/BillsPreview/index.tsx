@@ -7,7 +7,7 @@ async function BillsPreview({ userId }: { userId: string }) {
   const fiveBills = await fetchFiveUserBills(userId);
 
   return (
-    <section className="bg-white col-span-1 row-span-2">
+    <section className="bg-white xl:col-span-1 xl:row-span-2">
       <Header heading="Bills" linkText="See Details" />
       <ul className="mt-8 flex flex-col gap-y-4">
         {fiveBills.map((bill, index) => (

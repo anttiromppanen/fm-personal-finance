@@ -30,3 +30,13 @@
     @apply text-2xl;
   }
 }
+
+@layer utilities {
+  @media (max-width: 1024px) {
+    .grid-areas-lg {
+      grid-template-areas:
+        "pots budgets"
+        "transactions bills";
+    }
+  }
+}

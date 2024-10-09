@@ -36,7 +36,7 @@ async function ExpensePreviews({ userId }: { userId: string }) {
   const negativeTransactions = await fetchNegativeTransactions(userId);
 
   return (
-    <section className="grid grid-cols-3 gap-x-8 mt-10">
+    <section className="grid md:grid-cols-3 gap-y-4 gap-x-8 mt-10">
       <ExpenseModule
         testId="balance"
         amount={balance}

@@ -5,7 +5,7 @@ export function SmallCurrencyText({ amount }: { amount: number }) {
     <data
       value={amount}
       aria-label={`${amount} US Dollars`}
-      className="font-bold flex items-end"
+      className="md:font-bold flex items-end"
     >
       <span className="text-sm">$</span>
       <span data-testid="amount">{amount}</span>
