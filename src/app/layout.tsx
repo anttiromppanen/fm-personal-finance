@@ -29,7 +29,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={twJoin(
-          "grid grid-cols-[350px_1fr]",
+          "grid lg:grid-cols-[250px_1fr] xl:grid-cols-[350px_1fr]",
           arabic.variable,
           serif.variable,
         )}

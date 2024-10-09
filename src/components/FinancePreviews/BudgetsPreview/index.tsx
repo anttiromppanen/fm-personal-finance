@@ -15,13 +15,13 @@ async function BudgetsPreview({ userId }: { userId: string }) {
   return (
     <article className="bg-white col-span-1 row-span-2">
       <Header heading="Budgets" linkText="See Details" />
-      <div className="h-full w-full grid grid-cols-[1fr_150px]">
+      <div className="h-full w-full grid grid-rows-[1fr_100px] xl:grid-cols-[1fr_100px] gap-x-4">
         <BudgetPieChart
           fourBiggestBudgets={fourBiggestBudgets}
           totalAmount={totalAmount}
           totalLimit={totalLimit}
         />
-        <div className="flex flex-col gap-y-4 justify-center">
+        <div className="grid grid-cols-4 xl:flex xl:flex-col gap-y-4 items-center xl:items-start justify-center xl:justify-center">
           {fourBiggestBudgets.map((budget, index) => (
             <ColoredPreviewItem
               key={budget.id}

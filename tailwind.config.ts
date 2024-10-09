@@ -8,6 +8,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        xl: "1440px",
+      },
       fontFamily: {
         arabic: ["var(--font-arabic)", "sans-serif"],
         serif: ["var(--font-serif)", "serif"],

@@ -39,12 +39,17 @@ const navLinkIconSelector = (name: NavLinkNames) => {
 
 function Sidenav() {
   return (
-    <aside className="bg-primaryDark text-primaryLightGrey pr-8 min-h-screen relative rounded-r-2xl">
-      <div className="sticky left-0 top-7 rounded-r-2xl">
-        <p className="text-4xl font-serif text-primaryLight pl-8 tracking-wide">
+    <aside
+      className="
+      bg-primaryDark text-primaryLightGrey lg:pr-8 lg:min-h-screen fixed w-full lg:w-auto z-50 bottom-0 left-0 lg:relative rounded-t-2xl lg:rounded-tl-none lg:rounded-r-2xl
+      pt-2 px-4 lg:pl-0 lg:pt-0 
+      "
+    >
+      <div className="sticky left-0 top-7">
+        <p className="text-4xl font-serif text-primaryLight pl-8 tracking-wide hidden lg:block">
           finance
         </p>
-        <ul className="mt-14 font-arabic">
+        <ul className="lg:mt-14 font-arabic grid grid-cols-5 lg:flex flex-col">
           {links.map(({ name, urlTo }) => (
             <NavLink
               key={name}
