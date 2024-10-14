@@ -11,32 +11,22 @@
 
 @layer components {
   .heading-lg {
-    @apply font-bold tracking-wider text-2xl;
+    @apply text-2xl font-bold tracking-wider;
   }
 
   .text-input {
-    @apply px-2 py-1.5 border-primaryLightGrey border rounded-lg text-sm tracking-wide leading-none mt-1 focus:outline focus:outline-secondaryGreen outline-2;
+    @apply mt-1 rounded-lg border border-primaryLightGrey px-2 py-1.5 text-sm leading-none tracking-wide outline-2 focus:outline focus:outline-secondaryGreen;
   }
 
   .full-centered-container {
-    @apply flex flex-col h-dvh md:h-screen items-center justify-center;
+    @apply flex h-dvh flex-col items-center justify-center md:h-screen;
   }
 
   .large-currency-text {
-    @apply text-3xl text-primaryDark font-bold;
+    @apply text-3xl font-bold text-primaryDark;
   }
 
   .large-currency-text span {
     @apply text-2xl;
-  }
-}
-
-@layer utilities {
-  @media (max-width: 1024px) {
-    .grid-areas-lg {
-      grid-template-areas:
-        "pots budgets"
-        "transactions bills";
-    }
   }
 }

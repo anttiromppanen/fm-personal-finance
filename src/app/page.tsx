@@ -14,7 +14,7 @@ export default async function Home() {
   }
 
   return (
-    <div className="mt-10">
+    <div className="">
       <header className="flex justify-between">
         <h1 className="heading-lg">Overview</h1>
         <LogoutBtn />

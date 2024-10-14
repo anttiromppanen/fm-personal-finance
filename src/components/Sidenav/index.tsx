@@ -1,3 +1,6 @@
+"use client";
+
+import { usePathname } from "next/navigation";
 import { NavLink } from "./NavLink";
 import {
   faHouse,
@@ -6,6 +9,7 @@ import {
   faSackDollar,
   faMoneyBillTransfer,
 } from "@fortawesome/free-solid-svg-icons";
+import { twJoin } from "tailwind-merge";
 
 export type NavLinkNames =
   | "Overview"
@@ -17,9 +21,9 @@ export type NavLinkNames =
 const links: { name: NavLinkNames; urlTo: string }[] = [
   { name: "Overview", urlTo: "/" },
   { name: "Transactions", urlTo: "/transactions" },
-  { name: "Budgets", urlTo: "/" },
-  { name: "Pots", urlTo: "/" },
-  { name: "Recurring Bills", urlTo: "/" },
+  { name: "Budgets", urlTo: "/budgets" },
+  { name: "Pots", urlTo: "/pots" },
+  { name: "Recurring Bills", urlTo: "/bills" },
 ];
 
 const navLinkIconSelector = (name: NavLinkNames) => {
@@ -37,19 +41,24 @@ const navLinkIconSelector = (name: NavLinkNames) => {
   }
 };
 
+const pathsToDisableOn = ["/login", "/register"];
+
 function Sidenav() {
+  const pathname = usePathname();
+  const shouldDisable = pathsToDisableOn.includes(pathname);
+
   return (
     <aside
-      className="
-      bg-primaryDark text-primaryLightGrey lg:pr-8 lg:min-h-screen fixed w-full lg:w-auto z-50 bottom-0 left-0 lg:relative rounded-t-2xl lg:rounded-tl-none lg:rounded-r-2xl
-      pt-2 px-4 lg:pl-0 lg:pt-0 
-      "
+      className={twJoin(
+        `fixed bottom-0 left-0 z-50 w-full rounded-t-2xl bg-primaryDark px-4 pt-2 text-primaryLightGrey lg:relative lg:min-h-screen lg:w-auto lg:rounded-r-2xl lg:rounded-tl-none lg:pl-0 lg:pr-8 lg:pt-0`,
+        shouldDisable && "hidden",
+      )}
     >
       <div className="sticky left-0 top-7">
-        <p className="text-4xl font-serif text-primaryLight pl-8 tracking-wide hidden lg:block">
+        <p className="hidden pl-8 font-serif text-4xl tracking-wide text-primaryLight lg:block">
           finance
         </p>
-        <ul className="lg:mt-14 font-arabic grid grid-cols-5 lg:flex flex-col">
+        <ul className="grid grid-cols-5 flex-col font-arabic lg:mt-14 lg:flex">
           {links.map(({ name, urlTo }) => (
             <NavLink
               key={name}

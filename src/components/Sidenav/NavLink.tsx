@@ -23,7 +23,7 @@ const activeLinkSelector = (pathname: string): NavLinkNames => {
       return "Budgets";
     case "/pots":
       return "Pots";
-    case "/recurring-bills":
+    case "/bills":
       return "Recurring Bills";
     default:
       return "Overview";
@@ -38,9 +38,9 @@ export function NavLink({ name, icon, urlTo }: NavLinkProps) {
       <Link
         href={urlTo}
         className={twJoin(
-          "py-3 sm:py-2 lg:py-5 flex flex-col gap-y-3 lg:flex-row items-center lg:items-start gap-x-5 rounded-t-2xl lg:rounded-tl-none lg:rounded-r-2xl font-medium group transition-all ease-in-out duration-100",
+          "group flex flex-col items-center gap-x-5 gap-y-3 rounded-t-2xl py-3 font-medium transition-all duration-100 ease-in-out sm:py-2 lg:flex-row lg:items-start lg:rounded-r-2xl lg:rounded-tl-none lg:py-5",
           activeLinkSelector(pathname) === name &&
-            "bg-primaryLight text-primaryDark border border-b-4 lg:border-l-8 border-l-secondaryGreen border-b-secondaryGreen lg:border-b-0",
+            "border border-b-4 border-b-secondaryGreen border-l-secondaryGreen bg-primaryLight text-primaryDark lg:border-b-0 lg:border-l-8",
           activeLinkSelector(pathname) !== name &&
             "hover:bg-primaryDarkGrey/30",
         )}
@@ -48,11 +48,11 @@ export function NavLink({ name, icon, urlTo }: NavLinkProps) {
         <FontAwesomeIcon
           icon={icon}
           className={twJoin(
-            "size-5 lg:size-6 lg:ml-8 lg:group-hover:ml-10 transition-all ease-in-out duration-100",
+            "size-5 transition-all duration-100 ease-in-out lg:ml-8 lg:size-6 lg:group-hover:ml-10",
             activeLinkSelector(pathname) === name && "text-secondaryGreen",
           )}
         />
-        <p className="hidden sm:block text-xs lg:text-base">{name}</p>
+        <p className="hidden text-xs sm:block lg:text-base">{name}</p>
       </Link>
     </li>
   );

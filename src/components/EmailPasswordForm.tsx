@@ -28,9 +28,9 @@ function EmailPasswordForm({
   const footerLinkText = buttonText === "Log In" ? "Sign up" : "Log in";
 
   return (
-    <div className="bg-white w-[520px] flex flex-col shadow-xl shadow-[#e3d6c1] items-center md:px-20 md:py-10 rounded-xl">
+    <div className="left-1/2 top-1/2 flex h-[calc(100%-32px)] w-full flex-col items-center justify-center rounded-xl bg-white p-6 shadow-xl shadow-[#e3d6c1] md:h-auto md:w-[520px] md:px-20 md:py-10 lg:absolute lg:-translate-x-1/2 lg:-translate-y-1/2">
       <h1 className="heading-lg">{heading}</h1>
-      <p className="text-primaryDarkGrey mt-4 mb-6 text-sm">{description}</p>
+      <p className="mb-6 mt-4 text-sm text-primaryDarkGrey">{description}</p>
       {/* Error text */}
       {errorText && (
         <motion.div
@@ -38,10 +38,10 @@ function EmailPasswordForm({
           initial={{ x: -10, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
         >
-          <p className="text-red-500 text-sm mb-4">{errorText}</p>
+          <p className="mb-4 text-sm text-red-500">{errorText}</p>
         </motion.div>
       )}
-      <form onSubmit={onSubmit} className="flex flex-col w-full">
+      <form onSubmit={onSubmit} className="flex w-full flex-col">
         <label htmlFor="email" className="text-sm text-primaryDarkGrey">
           Email:
         </label>
@@ -53,7 +53,7 @@ function EmailPasswordForm({
           className="text-input"
           required
         />
-        <label htmlFor="password" className="text-sm text-primaryDarkGrey mt-3">
+        <label htmlFor="password" className="mt-3 text-sm text-primaryDarkGrey">
           Password:
         </label>
         <input
@@ -67,16 +67,16 @@ function EmailPasswordForm({
         <button
           type="submit"
           disabled={isLoading}
-          className="bg-secondaryGreen text-white flex justify-center text-sm py-2.5 rounded-lg mt-8 disabled:opacity-50"
+          className="mt-8 flex justify-center rounded-lg bg-secondaryGreen py-2.5 text-sm text-white disabled:opacity-50"
         >
           {isLoading ? <Loader /> : buttonText}
         </button>
       </form>
-      <div className="text-xs mt-3">
+      <div className="mt-3 text-xs">
         <span className="text-primaryDarkGrey">{footerText} </span>
         <Link
           href={buttonText === "Log In" ? "/register" : "/login"}
-          className="text-blue-700 font-bold"
+          className="font-bold text-blue-700"
         >
           {footerLinkText}
         </Link>
