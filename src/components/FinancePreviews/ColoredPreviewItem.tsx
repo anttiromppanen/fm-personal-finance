@@ -33,12 +33,12 @@ function ColoredPreviewItem({
       onMouseEnter={() => budget && setActiveBudget(newActiveBudget)}
       onMouseLeave={() => budget && setActiveBudget(null)}
       className={twJoin(
-        "transition-all cursor-default",
+        "cursor-default transition-all",
         borderColor,
         activeBudget?.name === name ? "border-l-[25px]" : "border-l-4",
       )}
     >
-      <div className="ml-4 flex flex-col gap-y-2">
+      <div className="ml-4 flex flex-col justify-center gap-y-2 md:items-center xl:items-start">
         <h3 className="text-[10px] text-primaryDarkGrey">{name}</h3>
         <SmallCurrencyText amount={amount} />
       </div>
