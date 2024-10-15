@@ -33,7 +33,7 @@ function BudgetPieChart({
   };
 
   return (
-    <div className="flex relative items-center justify-center">
+    <div className="relative flex items-center justify-center">
       <ResponsiveContainer width="100%" height="90%">
         <PieChart>
           <Pie
@@ -53,8 +53,8 @@ function BudgetPieChart({
                 fill={hexBgColors[index]}
                 className={
                   activeBudget?.name === entry.name
-                    ? "brightness-110 opacity-80"
-                    : "brightness-100 opacity-100"
+                    ? "opacity-80 brightness-110"
+                    : "opacity-100 brightness-100"
                 }
               />
             ))}
@@ -68,20 +68,20 @@ function BudgetPieChart({
             innerRadius="70%" // Creates a thin ring effect
             stroke="none"
             fill="rgba(255, 255, 255, 0.3)" // Optional: Set a semi-transparent color
-            className="relative pointer-events-none"
+            className="pointer-events-none relative"
           />
         </PieChart>
       </ResponsiveContainer>
-      <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-full flex flex-col items-center justify-center">
+      <div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 transform flex-col items-center justify-center rounded-full">
         {activeBudget && (
-          <h3 className="text-2xl text-primaryDarkGrey mb-1">
+          <h3 className="mb-1 text-2xl text-primaryDarkGrey">
             {activeBudget.name}
           </h3>
         )}
         <LargeCurrencyText
           amount={activeBudget?.amount ? activeBudget.amount : totalAmount}
         />
-        <p className="text-xs text-primaryDarkGrey mt-2">
+        <p className="mt-2 text-xs text-primaryDarkGrey">
           of <span className="text-[10px]">$</span>
           {activeBudget?.limit ? activeBudget.limit : totalLimit} limit
         </p>

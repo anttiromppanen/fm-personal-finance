@@ -13,9 +13,9 @@ async function BudgetsPreview({ userId }: { userId: string }) {
   const totalLimit = await fetchTotalLimit(userId);
 
   return (
-    <article className="bg-white xl:col-span-1 xl:row-span-2">
+    <article className="h-full bg-white xl:col-span-1 xl:row-span-2">
       <Header heading="Budgets" linkText="See Details" />
-      <div className="grid h-full min-h-96 w-full gap-x-4 lg:h-fit lg:grid-rows-[1fr_100px] xl:grid-cols-[1fr_100px] xl:grid-rows-1">
+      <div className="grid h-full min-h-96 w-full gap-x-4 lg:h-fit lg:grid-rows-[1fr_100px] xl:min-h-full xl:grid-cols-[1fr_100px] xl:grid-rows-1">
         <BudgetPieChart
           fourBiggestBudgets={fourBiggestBudgets}
           totalAmount={totalAmount}
