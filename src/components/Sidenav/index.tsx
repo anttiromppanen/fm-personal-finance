@@ -41,19 +41,9 @@ const navLinkIconSelector = (name: NavLinkNames) => {
   }
 };
 
-const pathsToDisableOn = ["/login", "/register"];
-
 function Sidenav() {
-  const pathname = usePathname();
-  const shouldDisable = pathsToDisableOn.includes(pathname);
-
   return (
-    <aside
-      className={twJoin(
-        `fixed bottom-0 left-0 z-50 w-full rounded-t-2xl bg-primaryDark px-4 pt-2 text-primaryLightGrey lg:relative lg:min-h-screen lg:w-auto lg:rounded-r-2xl lg:rounded-tl-none lg:pl-0 lg:pr-8 lg:pt-0`,
-        shouldDisable && "hidden",
-      )}
-    >
+    <aside className="fixed bottom-0 left-0 z-50 w-full rounded-t-2xl bg-primaryDark px-4 pt-2 text-primaryLightGrey lg:relative lg:min-h-screen lg:w-auto lg:rounded-r-2xl lg:rounded-tl-none lg:pl-0 lg:pr-8 lg:pt-0">
       <div className="sticky left-0 top-7">
         <p className="hidden pl-8 font-serif text-4xl tracking-wide text-primaryLight lg:block">
           finance
