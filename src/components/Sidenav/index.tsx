@@ -49,7 +49,7 @@ async function Sidenav() {
     <aside
       className={twMerge(
         `fixed bottom-0 left-0 z-50 hidden w-full rounded-t-2xl bg-primaryDark px-4 pt-2 text-primaryLightGrey lg:relative lg:min-h-screen lg:w-auto lg:rounded-r-2xl lg:rounded-tl-none lg:pl-0 lg:pr-8 lg:pt-0`,
-        data.user && "flex",
+        data.user && "block",
       )}
     >
       <div className="sticky left-0 top-7">
