@@ -1,15 +1,13 @@
-"use client";
-
-import { usePathname } from "next/navigation";
-import { NavLink } from "./NavLink";
+import { createClient } from "@/utils/supabase/server";
 import {
-  faHouse,
   faArrowRightArrowLeft,
   faChartPie,
-  faSackDollar,
+  faHouse,
   faMoneyBillTransfer,
+  faSackDollar,
 } from "@fortawesome/free-solid-svg-icons";
-import { twJoin } from "tailwind-merge";
+import { NavLink } from "./NavLink";
+import { twJoin, twMerge } from "tailwind-merge";
 
 export type NavLinkNames =
   | "Overview"
@@ -41,9 +39,19 @@ const navLinkIconSelector = (name: NavLinkNames) => {
   }
 };
 
-function Sidenav() {
+async function Sidenav() {
+  const supabase = createClient();
+
+  // Add error handling later
+  const { data } = await supabase.auth.getUser();
+
   return (
-    <aside className="fixed bottom-0 left-0 z-50 w-full rounded-t-2xl bg-primaryDark px-4 pt-2 text-primaryLightGrey lg:relative lg:min-h-screen lg:w-auto lg:rounded-r-2xl lg:rounded-tl-none lg:pl-0 lg:pr-8 lg:pt-0">
+    <aside
+      className={twMerge(
+        `fixed bottom-0 left-0 z-50 hidden w-full rounded-t-2xl bg-primaryDark px-4 pt-2 text-primaryLightGrey lg:relative lg:min-h-screen lg:w-auto lg:rounded-r-2xl lg:rounded-tl-none lg:pl-0 lg:pr-8 lg:pt-0`,
+        data.user && "flex",
+      )}
+    >
       <div className="sticky left-0 top-7">
         <p className="hidden pl-8 font-serif text-4xl tracking-wide text-primaryLight lg:block">
           finance
