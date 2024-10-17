@@ -1,4 +1,4 @@
-function TransactionsPage() {
+async function TransactionsPage() {
   return (
     <main>
       <h1 className="heading-lg">Transactions</h1>
